@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Case Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset + Responsive */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('{{ url_for("static", filename="background.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .loading {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 12px;
+            animation: blink 1s linear infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .result-container {
+            background-color: rgba(255, 255, 255, 0.88);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.9s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 18px;
+            color: #2c3e50;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 15px;
+            text-align: left;
+        }
+
+        a.download-link {
+            color: #004080;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        a.download-link:hover {
+            text-decoration: underline;
+        }
+
+        .qr-section {
+            margin-top: 18px;
+        }
+
+        .qr-section img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .back {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 13px;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 6px 15px;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .result-container {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Optional: Loading text shown before result loads -->
+    <div class="loading" id="loading">🔄 Loading case result...</div>
+
+    <div class="result-container" id="result" style="display:none;">
+        <h2>📋 Case Details</h2>
+
+        <p><strong>Parties:</strong> {{ data.parties }}</p>
+        <p><strong>Filing Date:</strong> {{ data.filing_date }}</p>
+        <p><strong>Next Hearing:</strong> {{ data.next_hearing }}</p>
+        <p><strong>Latest Order:</strong>
+            <a href="{{ data.latest_order }}" target="_blank" class="download-link">📥 Download PDF</a>
+        </p>
+
+        <!-- QR Code for the PDF -->
+        <div class="qr-section">
+            <p><strong>Scan to Open PDF:</strong></p>
+            <img src="{{ url_for('static', filename=qr_code) }}" alt="QR Code">
+        </div>
+
+        <a href="/" class="back">🔁 Search Another Case</a>
+    </div>
+
+    <footer>
+        Court Data Fetcher © 2025 | Contact: legal.support@example.com <br>
+        For demo purposes only — data sourced from public court portals.
+    </footer>
+
+    <!-- JavaScript to show result after delay -->
+    <script>
+        // Fake delay to simulate loading animation
+        setTimeout(function() {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("result").style.display = "block";
+        }, 1200);
+    </script>
+
+</body>
+</html>
