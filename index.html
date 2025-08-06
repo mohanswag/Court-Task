@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Court Data Fetcher</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-image: url('{{ url_for("static", filename="background.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .quote {
+            position: absolute;
+            top: 20px;
+            text-align: center;
+            font-size: 16px;  
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 6px 14px;  
+            border-radius: 4px; 
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.75);
+            padding: 18px;             
+            border-radius: 6px;        
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            width: 260px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 75px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-bottom: 16px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            float: left;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        input {
+            width: 100%;
+            padding: 6px;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background-color: #002b5c;
+        }
+    </style>
+</head>
+<body>
+    <!-- Quote at the top with welcome emoji -->
+    <div class="quote">
+        👋 “Injustice anywhere is a threat to justice everywhere”
+    </div>
+
+    <!-- Form -->
+    <div class="form-container">
+        <img src="{{ url_for('static', filename='court_logo.png') }}" alt="Court Logo" class="logo">
+
+        <h2>Court Data Fetcher</h2>
+        <form method="POST">
+            <label>Case Type:</label>
+            <input name="case_type" required>
+
+            <label>Case Number:</label>
+            <input name="case_number" required>
+
+            <label>Filing Year:</label>
+            <input name="filing_year" required>
+
+            <button type="submit">Fetch Case Data</button>
+        </form>
+    </div>
+</body>
+</html>
